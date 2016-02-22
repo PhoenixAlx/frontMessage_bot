@@ -26,7 +26,7 @@ from telebot import types # type api bot
 import time # for that the bot doesn't stop
 import pymongo #for database
 
-TOKEN = '184209426:AAGd5toVe1-wh80rnVzbnibdI3yv45SFrAA' # token
+TOKEN = 'token' # token
 
 bot = telebot.TeleBot(TOKEN) # new bot
 maxNumberChat=4;
