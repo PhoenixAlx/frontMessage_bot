@@ -65,7 +65,7 @@ def command_add(m):
 	sCid=str(cid);
 	messagesSave=loadDB();
 	msgAddStr=m.text.split("/add");
-	if (len(msgAddStr)>0):
+	if (len(msgAddStr)>0 and msgAddStr[1]!=''):
 		if (sCid in messagesSave.keys()):
 			listMsg=messagesSave[sCid];
 			maxNumber=len(listMsg.keys());
@@ -104,7 +104,7 @@ def command_del(m):
 	if (sCid in messagesSave):
 		listMsg=messagesSave[sCid];
 		msgAddStr=m.text.split("/del");
-		if (len(msgAddStr)>0):
+		if (len(msgAddStr)>0 and msgAddStr[1]!='' ):
 			numberMsg=int(msgAddStr[1]);
 			litKeys=map(int, listMsg.keys());
 			if (numberMsg in litKeys ):
