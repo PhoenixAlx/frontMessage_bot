@@ -65,20 +65,21 @@ def command_add(m):
 	sCid=str(cid);
 	messagesSave=loadDB();
 	msgAddStr=m.text.split("/add");
-	if (sCid in messagesSave.keys()):
-		listMsg=messagesSave[sCid];
-		maxNumber=len(listMsg.keys());
-		if (maxNumber>maxNumberChat):
-			bot.send_message( cid, 'No more messages, please. Remove one') # 'send_message()' 
+	if (len(msgAddStr)>0):
+		if (sCid in messagesSave.keys()):
+			listMsg=messagesSave[sCid];
+			maxNumber=len(listMsg.keys());
+			if (maxNumber>maxNumberChat):
+				bot.send_message( cid, 'No more messages, please. Remove one') # 'send_message()' 
+			else:
+				upNumber=str(maxNumber+1);
+				listMsg[upNumber]=msgAddStr[1];
+				messagesSave[sCid]=listMsg;
 		else:
-			upNumber=str(maxNumber+1);
-			listMsg[upNumber]=msgAddStr[1];
+			listMsg={};
+			listMsg["1"]=msgAddStr[1];
 			messagesSave[sCid]=listMsg;
-	else:
-		listMsg={};
-		listMsg["1"]=msgAddStr[1];
-		messagesSave[sCid]=listMsg;
-	saveDB(messagesSave);
+		saveDB(messagesSave);
 	return True
 
 @bot.message_handler(commands=['front']) # command '/front'
@@ -102,18 +103,19 @@ def command_del(m):
 	if (sCid in messagesSave):
 		listMsg=messagesSave[sCid];
 		msgAddStr=m.text.split("/del");
-		numberMsg=int(msgAddStr[1]);
-		litKeys=map(int, listMsg.keys());
-		if (numberMsg in litKeys ):
-			newListMsg={};
-			i=1;
-			for men in litKeys:
-				if (men!=numberMsg):
-				  newListMsg[str(i)]= listMsg[str(men)];
-				  i=i+1;
-			messagesSave[sCid]=newListMsg;
-			bot.send_message( cid, "Remove mesg "+msgAddStr[1]) #  'send_message()'
-	saveDB(messagesSave);
+		if (len(msgAddStr)>0):
+			numberMsg=int(msgAddStr[1]);
+			litKeys=map(int, listMsg.keys());
+			if (numberMsg in litKeys ):
+				newListMsg={};
+				i=1;
+				for men in litKeys:
+					if (men!=numberMsg):
+					  newListMsg[str(i)]= listMsg[str(men)];
+					  i=i+1;
+				messagesSave[sCid]=newListMsg;
+				bot.send_message( cid, "Remove mesg "+msgAddStr[1]) #  'send_message()'
+			saveDB(messagesSave);
 	return True
 @bot.message_handler(commands=['help']) # command '/help'
 def command_help(m):
