@@ -90,7 +90,8 @@ def command_front(m):
 	messagesSave=loadDB();
 	if (sCid in messagesSave):
 		listMsg=messagesSave[sCid];
-		for l in listMsg.keys():
+		listMsgSort=sorted(listMsg.keys());
+		for l in listMsgSort:
 			msgText=str(l) + ") "+listMsg[l];
 			bot.send_message( cid, msgText) # 'send_message()' 
 	return True
