@@ -127,4 +127,4 @@ def command_help(m):
 	
 #############################################
 #Petitions
-bot.polling(none_stop=True) # bot doesn't stop even when there is a error
+bot.polling(none_stop=False) # bot doesn't stop even when there is a error
